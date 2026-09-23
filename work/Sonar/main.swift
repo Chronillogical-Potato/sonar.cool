@@ -15,6 +15,9 @@ import CoreAudio
 import PDFKit
 import ApplicationServices
 import Combine
+#if canImport(SonarCore)
+import SonarCore
+#endif
 
 // Passive pulse detector: it never changes scroll velocity or waits to release it.
 struct DoublePushDetector {
@@ -273,22 +276,6 @@ struct PaperView: NSViewRepresentable {
     let reader: Reader
     func makeNSView(context: Context) -> PDFView { reader.pdf }
     func updateNSView(_ view: PDFView, context: Context) {}
-}
-
-struct Reading {
-    var spectrum: [Float]
-    var baseline: [Float]
-    var direction: String
-    var carrierDB: Float
-    var snr: Float
-    var strength: Float
-    var waveBands: [Double] = []
-    var opposedStrength: Float = 0
-    var waveform: [Float] = []
-    var sampleRate: Double = 0
-    var firstFrequency: Double = 0
-    var binWidth: Double = 0
-    var calibrationRemaining: Double? = nil
 }
 
 final class Analyzer {

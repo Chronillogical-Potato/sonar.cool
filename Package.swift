@@ -7,9 +7,27 @@ let package = Package(
         .macOS(.v14)
     ],
     targets: [
+        .target(
+            name: "SonarCore",
+            path: "work/SonarCore",
+            linkerSettings: [
+                .linkedFramework("Accelerate"),
+            ]
+        ),
         .executableTarget(
             name: "Sonar",
+            dependencies: ["SonarCore"],
             path: ".",
+            exclude: [
+                "work/SonarCore",
+                "Tests",
+                "script",
+                "docs",
+                "AGENTS.md",
+                "LICENSE",
+                "README.md",
+                "assets/gesture-sensing.gif",
+            ],
             sources: ["work/Sonar"],
             resources: [
                 .copy("assets/zoom"),
@@ -31,6 +49,11 @@ let package = Package(
                 .unsafeFlags(["-Xlinker", "-sectcreate", "-Xlinker", "__TEXT",
                               "-Xlinker", "__info_plist", "-Xlinker", "script/Info.plist"]),
             ]
+        ),
+        .testTarget(
+            name: "SonarTests",
+            dependencies: ["SonarCore"],
+            path: "Tests/SonarTests"
         )
     ]
 )

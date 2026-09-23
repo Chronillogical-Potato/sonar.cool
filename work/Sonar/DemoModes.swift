@@ -1,5 +1,8 @@
 import AppKit
 import SwiftUI
+#if canImport(SonarCore)
+import SonarCore
+#endif
 
 // These demos classify radial motion, not hand position or finger count.
 enum DemoMode: String, CaseIterable, Identifiable {

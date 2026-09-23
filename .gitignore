@@ -2,6 +2,7 @@
 outputs/
 work/*
 !work/Sonar/
+!work/SonarCore/
 .codex/*
 !.codex/environments/
 .swiftpm/

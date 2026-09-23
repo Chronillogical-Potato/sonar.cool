@@ -1,6 +1,9 @@
 import AppKit
 import Carbon
 import ApplicationServices
+#if canImport(SonarCore)
+import SonarCore
+#endif
 
 struct ZoomMotion {
     var steps = 0
