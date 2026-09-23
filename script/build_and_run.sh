@@ -26,24 +26,9 @@ elif [[ -n "${SONAR_PAPER_PATH:-}" ]]; then
   echo "PDF not found: $SONAR_PAPER_PATH" >&2
   exit 1
 fi
-swiftc -target arm64-apple-macosx14.0 -O work/Sonar/main.swift work/Sonar/HardwareAudio.swift work/Sonar/SpeakerVolume.swift work/Sonar/Diagnostics.swift work/Sonar/DeviceSetup.swift work/Sonar/SystemScroll.swift work/Sonar/DemoModes.swift work/Sonar/WaveCalibration.swift work/Sonar/ContentView.swift work/Sonar/ControlModeView.swift work/Sonar/SignalView.swift work/Sonar/AudioSignalView.swift work/Sonar/Distance.swift work/Sonar/Position.swift work/Sonar/EchoFlowView.swift work/Sonar/Zoom.swift -o "$SONAR_APP/Contents/MacOS/Sonar" -framework AppKit -framework SwiftUI -framework AVFoundation -framework Accelerate -framework CoreAudio -framework PDFKit -framework Carbon -framework ApplicationServices
-cat > "$SONAR_APP/Contents/Info.plist" <<'PLIST'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>CFBundleExecutable</key><string>Sonar</string>
-<key>CFBundleIdentifier</key><string>com.emanuel.sonarlab</string>
-<key>CFBundleShortVersionString</key><string>0.1.4</string>
-<key>CFBundleVersion</key><string>11</string>
-<key>CFBundleName</key><string>Sonar</string>
-<key>CFBundleDisplayName</key><string>Sonar</string>
-<key>CFBundleIconFile</key><string>Sonar.icns</string>
-<key>CFBundlePackageType</key><string>APPL</string>
-<key>LSMinimumSystemVersion</key><string>14.0</string>
-<key>NSPrincipalClass</key><string>NSApplication</string>
-<key>NSMicrophoneUsageDescription</key><string>Sonar listens for reflections of its test tone to detect hand movement. Audio is not saved.</string>
-</dict></plist>
-PLIST
+swiftc -target arm64-apple-macosx14.0 -O work/Sonar/main.swift work/Sonar/BundleExtension.swift work/Sonar/HardwareAudio.swift work/Sonar/SpeakerVolume.swift work/Sonar/Diagnostics.swift work/Sonar/DeviceSetup.swift work/Sonar/SystemScroll.swift work/Sonar/DemoModes.swift work/Sonar/WaveCalibration.swift work/Sonar/ContentView.swift work/Sonar/ControlModeView.swift work/Sonar/SignalView.swift work/Sonar/AudioSignalView.swift work/Sonar/Distance.swift work/Sonar/Position.swift work/Sonar/EchoFlowView.swift work/Sonar/Zoom.swift -o "$SONAR_APP/Contents/MacOS/Sonar" -framework AppKit -framework SwiftUI -framework AVFoundation -framework Accelerate -framework CoreAudio -framework PDFKit -framework Carbon -framework ApplicationServices
+# Version, bundle ID and permission text live in script/Info.plist, shared with Package.swift.
+cp script/Info.plist "$SONAR_APP/Contents/Info.plist"
 # A stable certificate preserves permissions across rebuilds. Local builds can
 # use ad-hoc signing without owning a paid Apple developer certificate.
 SONAR_SIGNING_IDENTITY="${SONAR_SIGNING_IDENTITY:--}"

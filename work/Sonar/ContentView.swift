@@ -72,7 +72,7 @@ struct ContentView: View {
         HStack(spacing:0) {
             VStack(alignment:.leading,spacing:0) {
                 HStack(spacing:4) {
-                    if let url = Bundle.main.url(forResource:"SonarMark",withExtension:"png"), let mark = NSImage(contentsOf:url) {
+                    if let url = Bundle.sonarResources.url(forResource:"SonarMark",withExtension:"png"), let mark = NSImage(contentsOf:url) {
                         Image(nsImage:mark).resizable().scaledToFit().frame(width:52,height:52)
                     }
                     Text("sonar")

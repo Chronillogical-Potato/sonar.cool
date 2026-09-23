@@ -132,7 +132,7 @@ struct ControlModeView: View {
         if reader.mode == .gallery {
             return demo.photos.isEmpty ? nil : demo.photos[demo.galleryIndex % demo.photos.count]
         }
-        guard let url = Bundle.main.url(forResource:"yoda",withExtension:"jpeg",subdirectory:"Zoom") else { return nil }
+        guard let url = Bundle.sonarResources.url(forResource:"yoda",withExtension:"jpeg",subdirectory:"Zoom") else { return nil }
         return NSImage(contentsOf:url)
     }
     @ViewBuilder private var actions: some View {
@@ -178,7 +178,7 @@ private struct GesturePreview: NSViewRepresentable {
         let view = ContainedGestureImageView()
         view.imageScaling = .scaleProportionallyUpOrDown
         view.animates = true
-        if let url = Bundle.main.url(forResource:resource,withExtension:"gif",subdirectory:"Zoom") {
+        if let url = Bundle.sonarResources.url(forResource:resource,withExtension:"gif",subdirectory:"Zoom") {
             view.image = NSImage(contentsOf:url)
         }
         return view

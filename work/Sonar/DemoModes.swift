@@ -68,7 +68,7 @@ final class DemoSession: ObservableObject {
     init() { loadSamplePhotos() }
     func loadSamplePhotos() {
         photos = (1...5).compactMap { index in
-            guard let url = Bundle.main.url(forResource:String(format:"%02d",index),withExtension:"jpg",subdirectory:"Gallery") else { return nil }
+            guard let url = Bundle.sonarResources.url(forResource:String(format:"%02d",index),withExtension:"jpg",subdirectory:"Gallery") else { return nil }
             return NSImage(contentsOf:url)
         }
         galleryIndex = 0; resetInput()

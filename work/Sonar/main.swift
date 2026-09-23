@@ -202,7 +202,7 @@ final class Reader: ObservableObject {
         pdf.displayDirection = .vertical
         pdf.autoScales = true
         pdf.backgroundColor = NSColor(calibratedWhite: 0.12, alpha: 1)
-        if let url = Bundle.main.url(forResource: "SoundWave", withExtension: "pdf") {
+        if let url = Bundle.sonarResources.url(forResource: "SoundWave", withExtension: "pdf") {
             pdf.document = PDFDocument(url: url)
         }
         if pdf.document == nil {
@@ -653,7 +653,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
         statusItem.button?.image = menuMark()
         statusItem.button?.imagePosition = .imageLeading
         statusItem.button?.setAccessibilityLabel("Sonar")
-        if let url = Bundle.main.url(forResource:"Sonar",withExtension:"icns") {
+        if let url = Bundle.sonarResources.url(forResource:"Sonar",withExtension:"icns") {
             NSApp.applicationIconImage = NSImage(contentsOf:url)
         }
         statusItem.button?.title = ""
